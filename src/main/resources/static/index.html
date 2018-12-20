@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style type="text/css">
     body {
@@ -11,13 +12,23 @@
 
 </style>
 <script type="text/javascript">
-    function alertDate() {
-        alert(Date());
-        var number = 5;
-        var result = 5 + "";
-        var result2 = parseInt(result);
-        document.getElementById("demo").value;
-    }
+
+$(document).ready(function(){
+    console.log("getting the data...");
+    $.ajax({
+        url: "http://localhost:8080/test",
+        type: "get",
+        success: function (data) {
+                $.each(data,function(i,obj)
+                {
+                // alert(obj.id+":"+obj.name);
+                 var div_data="<option value="+obj.id+">"+obj.name+"</option>";
+                //alert(div_data);
+                $(div_data).appendTo('#data');
+                });
+                }
+    });
+})
 
 </script>
 
@@ -25,7 +36,9 @@
 <h1 id="demo">big heading</h1>
 <h2>smallerheading</h2>
 <h6>smallestheading</h6>
-<button onclick="alertDate()">hoi</button>
+<!--<button onclick="getData()">hoi</button>-->
+<select id="data"></select>
+
 </body>
 
 </html>
