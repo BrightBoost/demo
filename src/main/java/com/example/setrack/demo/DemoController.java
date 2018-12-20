@@ -1,6 +1,8 @@
 package com.example.setrack.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,8 +11,9 @@ import java.util.List;
 @RestController
 public class DemoController {
 
+    @Qualifier
     @Autowired
-    DemoRepository demoRepository;
+    private DemoRepository demoRepository;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public List<Demo> getAll(){
