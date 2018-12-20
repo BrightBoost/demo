@@ -1,13 +1,17 @@
 package com.example.setrack.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
+import java.util.Objects;
+
 
 @Entity
 @Table(name = "demo")
 public class Demo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Access(AccessType.PROPERTY)
     private long id;
 
     public long getId() {
@@ -18,6 +22,7 @@ public class Demo {
         this.id = id;
     }
 
+    @Column(name = "name")
     private String name;
 
     public String getName() {
@@ -26,5 +31,9 @@ public class Demo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void init(){
+
     }
 }
