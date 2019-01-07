@@ -10,5 +10,6 @@ import java.util.List;
 public interface DemoRepository extends CrudRepository<Demo, Long> {
     List<Demo> findAll();
     Demo findById(long id);
+    Demo findByName(String name);
 
 }

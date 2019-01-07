@@ -8,9 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableAutoConfiguration
-@EnableJpaRepositories("com.example.setrack.demo")
-@EntityScan(basePackages = "com.example.setrack.demo")
-@ComponentScan({"com.example.setrack.demo"})
+@EnableJpaRepositories
 @SpringBootApplication
 public class DemoApplication {
 

@@ -25,7 +25,6 @@ public class DemoController {
         return demoRepository.findById(id);
     }
 
-
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void saveDemo(@RequestBody Demo demo){
         Demo d = new Demo();
@@ -38,6 +37,4 @@ public class DemoController {
     public void deleteDemo(@RequestParam long id){
         demoRepository.deleteById(id);
     }
-
-
 }
