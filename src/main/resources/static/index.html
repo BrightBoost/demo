@@ -21,7 +21,17 @@ $(document).ready(function(){
         });
 
     $.ajax({
-        url: "http://localhost:8080/test",
+        url: "http://localhost:8080/find-one/",
+        type: "get",
+        data: {id: 1},
+        success: function (asdf) {
+            console.log("found one: " + asdf.name);
+        }
+
+
+    });
+    $.ajax({
+        url: "http://localhost:8080/get-demos",
         type: "get",
         success: function (data) {
                 $.each(data,function(i,obj)
@@ -34,15 +44,26 @@ $(document).ready(function(){
                 }
     });
 
-    $("#form").submit(function(){
-         alert("Submitted");
-          $.ajax({
-              type: "POST",
+
+    function postDemo() {
+        var name = $('#name').val();
+
+        var demoObj = {
+            name: name
+        };
+
+        var jsonObject = JSON.stringify(demoObj);
+
+
+        $.ajax({
+              type: "post",
               url: "http://localhost:8080/save",
-              data: $("#form").serialize(),
+              data: jsonObject,
+              contentType:"application/json; charset=UTF-8",
+              dataType: "json",
               success: alert("success")
-    });
-});
+         })
+    };
 })
 
 
@@ -54,11 +75,14 @@ $(document).ready(function(){
 <h2>smallerheading</h2>
 <h6>smallestheading</h6>
 <!--<button onclick="getData()">hoi</button>-->
-<select id="data"></select>
+<select id="data">
+    <option value="123">;jkllkjhlhkjlkjhgljg</option>
 
-<form id="form">
-    <input type="text"></input>
-    <button type="submit">submit demo</button>
+</select>
+
+<form id="form" action="save" method="post">
+    <input id="name" type="text"></input>
+    <button type="submit" onclick="postData()">submit demo</button>
 </form>
 <form>
     <button type="submit" id="hoi" onclick=alert('oi')>HOI</button>

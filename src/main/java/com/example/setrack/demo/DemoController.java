@@ -15,7 +15,7 @@ public class DemoController {
     @Autowired
     private DemoRepository demoRepository;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-demos", method = RequestMethod.GET)
     public List<Demo> getAll(){
         return demoRepository.findAll();
     }
@@ -26,11 +26,12 @@ public class DemoController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public void saveDemo(@RequestBody Demo demo){
+    public void saveDemo(@PathVariable("name") String name){
         Demo d = new Demo();
-        d.setName(demo.getName());
-        d.setId(demo.getId());
+        d.setName(name);
         demoRepository.save(d);
+
+        //demoRepository.save(demo);
     }
 
     @RequestMapping(value= "/delete", method = RequestMethod.DELETE)
