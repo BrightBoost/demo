@@ -10,7 +10,7 @@
 
 <style type="text/css">
     body {
-    background-color: pink;
+       background-color: pink;
     }
 
 </style>
@@ -32,28 +32,27 @@ $(document).ready(function(){
 
     $("#hoi").click(function hoi() {
         alert("it works");
-        });
+     });
 
     $.ajax({
         url: "http://localhost:8080/find-one/",
         type: "get",
         data: {id: 1},
-        success: function (asdf) {
-            console.log("found one: " + asdf.name);
+        success: function (kj) {
+            console.log("found one: " + kj.id);
         }
-
-
     });
+
     $.ajax({
         url: "http://localhost:8080/get-demos",
         type: "get",
         success: function (data) {
-                $.each(data,function(i,obj)
+                $.each(data,function(i,kj)
                 {
-                // alert(obj.id+":"+obj.name);
-                 var div_data="<option value="+obj.id+">"+obj.name+"</option>";
-                //alert(div_data);
-                $(div_data).appendTo('#data');
+                    // alert(kj.id+":"+kj.name);
+                    var div_data="<option value="+kj.id+">"+kj.name+"</option>";
+                    //alert(div_data);
+                    $(div_data).appendTo('#data');
                 })}
     });
 
@@ -99,7 +98,7 @@ $(document).ready(function(){
     <button id="save-demo" type="button" onclick="postDemo()">submit demo</button>
 </form>
 <form>
-    <button type="button" id="hoi" onclick=alert('oi')>HOI</button>
+    <button type="button" id="hoi" onclick="alert('hoi')">HOI</button>
 </form>
 
 <table id="table_id" class="display">
