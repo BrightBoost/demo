@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>Title</title>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+            url: "http://localhost:8080/get-persons",
+            type: "get",
+            success: function (data) {
+                $.each(data,function(i,obj)
+                {
+                    var div_data="<option value="+obj.id+">"+obj.name+" "+obj.age+"</option>";
+                    $(div_data).appendTo('#persons');
+                })}
+            });
+
+        })
+
+        function savePerson(){
+            var name = $("#name").val();
+            var age = $("#age").val();
+
+            var object = {
+                "name": name,
+                "age": age
+            };
+
+            var jsonObject = JSON.stringify(object);
+
+            $.ajax({
+              type: "post",
+              url: "http://localhost:8080/add-person",
+              data: jsonObject,
+              contentType:"application/json;",
+              dataType: "application/json",
+              success: alert("success")
+         })
+
+        }
+
+        function editPerson(){
+            var name = $("#editname").val();
+            var age = $("#editage").val();
+            var id = $("#persons option:selected").val();
+
+            var object = {
+                "name": name,
+                "age": age,
+                "id": id
+            };
+
+            var jsonObject = JSON.stringify(object);
+
+            $.ajax({
+              type: "post",
+              url: "http://localhost:8080/edit-person",
+              data: jsonObject,
+              contentType:"application/json;",
+              dataType: "application/json",
+              success: alert("success")
+         })
+
+        }
+    </script>
+
+</head>
+<body>
+    <select id="persons"></select>
+    <form>
+        <input id="editname" type="text"/>
+        <input id="editage" type="number"/>
+        <button type="button" onclick="editPerson()">edit person</button>
+    </form>
+
+    <form>
+        <input id="name" type="text"/>
+        <input id="age" type="number" min="0" max="125"/>
+        <button type="button" onclick="savePerson()">submit person</button>
+    </form>
+</body>
+</html>
